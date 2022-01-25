@@ -1,0 +1,38 @@
+{
+  "packageId": "app.netlify.optimistic_bohr_fc5c22.twa",
+  "host": "optimistic-bohr-fc5c22.netlify.app",
+  "name": "tests-pwa",
+  "launcherName": "tests-pwa",
+  "display": "standalone",
+  "themeColor": "#FFFFFF",
+  "navigationColor": "#000000",
+  "navigationColorDark": "#000000",
+  "navigationDividerColor": "#000000",
+  "navigationDividerColorDark": "#000000",
+  "backgroundColor": "#FFFFFF",
+  "enableNotifications": true,
+  "startUrl": "/?standalone=true",
+  "iconUrl": "https://optimistic-bohr-fc5c22.netlify.app/_nuxt/icons/icon_512x512.e3e9fb.png",
+  "maskableIconUrl": "https://optimistic-bohr-fc5c22.netlify.app/_nuxt/icons/icon_512x512.e3e9fb.png",
+  "splashScreenFadeOutDuration": 300,
+  "signingKey": {
+    "path": "/Users/plong/WORKSPACE/poc-twa/android.keystore",
+    "alias": "android"
+  },
+  "appVersionName": "1",
+  "appVersionCode": 1,
+  "shortcuts": [],
+  "generatorApp": "bubblewrap-cli",
+  "webManifestUrl": "https://optimistic-bohr-fc5c22.netlify.app/_nuxt/manifest.f39262b6.json",
+  "fallbackType": "customtabs",
+  "features": {},
+  "alphaDependencies": {
+    "enabled": false
+  },
+  "enableSiteSettingsShortcut": true,
+  "isChromeOSOnly": false,
+  "orientation": "default",
+  "fingerprints": [],
+  "additionalTrustedOrigins": [],
+  "appVersion": "1"
+}
