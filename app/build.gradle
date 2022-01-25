@@ -18,36 +18,36 @@ import groovy.xml.MarkupBuilder
 
 plugins {
     id 'com.android.application'
-    
+
 }
 
 def twaManifest = [
-    applicationId: 'app.netlify.optimistic_bohr_fc5c22.twa',
-    hostName: 'optimistic-bohr-fc5c22.netlify.app', // The domain being opened in the TWA.
-    launchUrl: '/?standalone=true', // The start path for the TWA. Must be relative to the domain.
-    name: 'tests-pwa', // The application name.
-    launcherName: 'tests-pwa', // The name shown on the Android Launcher.
-    themeColor: '#FFFFFF', // The color used for the status bar.
-    navigationColor: '#000000', // The color used for the navigation bar.
-    navigationColorDark: '#000000', // The color used for the dark navbar.
-    navigationDividerColor: '#000000', // The navbar divider color.
-    navigationDividerColorDark: '#000000', // The dark navbar divider color.
-    backgroundColor: '#FFFFFF', // The color used for the splash screen background.
-    enableNotifications: true, // Set to true to enable notification delegation.
-    // Every shortcut must include the following fields:
-    // - name: String that will show up in the shortcut.
-    // - short_name: Shorter string used if |name| is too long.
-    // - url: Absolute path of the URL to launch the app with (e.g '/create').
-    // - icon: Name of the resource in the drawable folder to use as an icon.
-    shortcuts: [],
-    // The duration of fade out animation in milliseconds to be played when removing splash screen.
-    splashScreenFadeOutDuration: 300,
-    generatorApp: 'bubblewrap-cli', // Application that generated the Android Project
-    // The fallback strategy for when Trusted Web Activity is not avilable. Possible values are
-    // 'customtabs' and 'webview'.
-    fallbackType: 'customtabs',
-    enableSiteSettingsShortcut: 'true',
-    orientation: 'default',
+        applicationId              : 'app.netlify.optimistic_bohr_fc5c22.twa',
+        hostName                   : 'optimistic-bohr-fc5c22.netlify.app', // The domain being opened in the TWA.
+        launchUrl                  : '/?standalone=true', // The start path for the TWA. Must be relative to the domain.
+        name                       : 'tests-pwa', // The application name.
+        launcherName               : 'tests-pwa', // The name shown on the Android Launcher.
+        themeColor                 : '#FFFFFF', // The color used for the status bar.
+        navigationColor            : '#000000', // The color used for the navigation bar.
+        navigationColorDark        : '#000000', // The color used for the dark navbar.
+        navigationDividerColor     : '#000000', // The navbar divider color.
+        navigationDividerColorDark : '#000000', // The dark navbar divider color.
+        backgroundColor            : '#FFFFFF', // The color used for the splash screen background.
+        enableNotifications        : true, // Set to true to enable notification delegation.
+        // Every shortcut must include the following fields:
+        // - name: String that will show up in the shortcut.
+        // - short_name: Shorter string used if |name| is too long.
+        // - url: Absolute path of the URL to launch the app with (e.g '/create').
+        // - icon: Name of the resource in the drawable folder to use as an icon.
+        shortcuts                  : [],
+        // The duration of fade out animation in milliseconds to be played when removing splash screen.
+        splashScreenFadeOutDuration: 300,
+        generatorApp               : 'bubblewrap-cli', // Application that generated the Android Project
+        // The fallback strategy for when Trusted Web Activity is not avilable. Possible values are
+        // 'customtabs' and 'webview'.
+        fallbackType               : 'customtabs',
+        enableSiteSettingsShortcut : 'true',
+        orientation                : 'default',
 ]
 
 android {
@@ -69,14 +69,12 @@ android {
         def launchUrl = "https://" + twaManifest.hostName + twaManifest.launchUrl
         resValue "string", "launchUrl", launchUrl
 
-        
-            // The URL the Web Manifest for the Progressive Web App that the TWA points to. This
-            // is used by Chrome OS to open the Web version of the PWA instead of the TWA, as it
-            // will probably give a better user experience for non-mobile devices.
-            resValue "string", "webManifestUrl", 'https://optimistic-bohr-fc5c22.netlify.app/_nuxt/manifest.f39262b6.json'
-        
 
-        
+        // The URL the Web Manifest for the Progressive Web App that the TWA points to. This
+        // is used by Chrome OS to open the Web version of the PWA instead of the TWA, as it
+        // will probably give a better user experience for non-mobile devices.
+        resValue "string", "webManifestUrl", 'https://optimistic-bohr-fc5c22.netlify.app/_nuxt/manifest.f39262b6.json'
+
 
         // The hostname is used when building the intent-filter, so the TWA is able to
         // handle Intents to open https://svgomg.firebaseapp.com.
@@ -150,7 +148,6 @@ android {
 }
 
 
-
 task generateShorcutsFile {
     assert twaManifest.shortcuts.size() < 5, "You can have at most 4 shortcuts."
     twaManifest.shortcuts.eachWithIndex { s, i ->
@@ -166,35 +163,35 @@ task generateShorcutsFile {
     def xmlMarkup = new MarkupBuilder(new IndentPrinter(xmlWriter, "    ", true))
 
     xmlMarkup
-        .'shortcuts'('xmlns:android': 'http://schemas.android.com/apk/res/android') {
-            twaManifest.shortcuts.eachWithIndex { s, i ->
-                'shortcut'(
-                        'android:shortcutId': 'shortcut' + i,
-                        'android:enabled': 'true',
-                        'android:icon': '@drawable/' + s.icon,
-                        'android:shortcutShortLabel': '@string/shortcut_short_name_' + i,
-                        'android:shortcutLongLabel': '@string/shortcut_name_' + i) {
-                    'intent'(
-                            'android:action': 'android.intent.action.MAIN',
-                            'android:targetPackage': twaManifest.applicationId,
-                            'android:targetClass': twaManifest.applicationId + '.LauncherActivity',
-                            'android:data': s.url)
-                    'categories'('android:name': 'android.intent.category.LAUNCHER')
+            .'shortcuts'('xmlns:android': 'http://schemas.android.com/apk/res/android') {
+                twaManifest.shortcuts.eachWithIndex { s, i ->
+                    'shortcut'(
+                            'android:shortcutId': 'shortcut' + i,
+                            'android:enabled': 'true',
+                            'android:icon': '@drawable/' + s.icon,
+                            'android:shortcutShortLabel': '@string/shortcut_short_name_' + i,
+                            'android:shortcutLongLabel': '@string/shortcut_name_' + i) {
+                        'intent'(
+                                'android:action': 'android.intent.action.MAIN',
+                                'android:targetPackage': twaManifest.applicationId,
+                                'android:targetClass': twaManifest.applicationId + '.LauncherActivity',
+                                'android:data': s.url)
+                        'categories'('android:name': 'android.intent.category.LAUNCHER')
+                    }
                 }
             }
-        }
     shortcutsFile.text = xmlWriter.toString() + '\n'
 }
 
 preBuild.dependsOn(generateShorcutsFile)
 
 repositories {
-    
+
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    
-        implementation 'com.google.androidbrowserhelper:androidbrowserhelper:2.3.0'
-    
+
+    implementation 'com.google.androidbrowserhelper:androidbrowserhelper:2.3.0'
+
 }
